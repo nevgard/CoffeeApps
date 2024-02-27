@@ -1,4 +1,5 @@
 // Import Swiper React components
+import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 
@@ -16,7 +17,8 @@ export default function CardProducts(props) {
     >
       {data.map((product, index) => (
         <SwiperSlide key={index}>
-          <div
+          <Link
+            to={`/productDetials/${product.id}`}
             key={index}
             className="mt-4 flex flex-col items-center relative mr-6 "
           >
@@ -34,7 +36,7 @@ export default function CardProducts(props) {
                 })}
               </h1>
             </div>
-          </div>
+          </Link>
         </SwiperSlide>
       ))}
     </Swiper>

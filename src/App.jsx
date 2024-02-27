@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./App.css";
 import Homepage from "./components/pages/Homepage";
 import Sidebar from "./components/molecul/Sidebar";
+import DetailProducts from "./components/pages/DetailProducts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
               </>
             }
           />
+          <Route path="/productDetials/:id" element={<DetailProducts />} />
         </Routes>
       </BrowserRouter>
     </>

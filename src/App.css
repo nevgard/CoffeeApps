@@ -1,3 +1,26 @@
 .bg-primary {
   background-color: #556052;
 }
+.border-primary {
+  border-color: #556052;
+}
+.text-primary {
+  color: #556052;
+}
+.active {
+  background-color: #556052;
+  color: white;
+}
+
+.buttonOption {
+  border: 1px solid;
+  width: 5rem;
+  padding: 0.75rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 6px;
+}
