@@ -3,11 +3,13 @@ import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
 import ProductsList from "../../constant/ProductsList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Header from "../molecul/Header";
 
 export default function DetailProducts() {
   const { id } = useParams();
   const data = ProductsList.find((product) => product.id === parseInt(id, 10));
+  const [totalPrice, setTotalPrice] = useState(data.price);
   const [quantity, setQuantity] = useState(1);
   const [options, setOptions] = useState({
     temp: "hot",
@@ -29,16 +31,24 @@ export default function DetailProducts() {
   const handleOptionClick = (option, value) => {
     setOptions((prevOptions) => ({ ...prevOptions, [option]: value }));
   };
-  const totalPrice = quantity * data.price;
 
-  console.log(options);
+  const handleTotalPrice = () => {
+    let total = data.price;
+    if (options.size === "large") {
+      total += 2000;
+    }
+    if (options.milk === "oat") {
+      total += 1000;
+    }
+    setTotalPrice(total * quantity);
+  };
+  useEffect(() => {
+    handleTotalPrice(), [options, quantity];
+  });
+  console.log(totalPrice);
   return (
     <div className="w-full flex flex-wrap bg-neutral-200">
-      <div id="header" className="w-full px-4 py-3 shadow-md bg-white">
-        <Link to={"/"}>
-          <IoChevronBackCircleOutline className=" text-4xl text-primary " />
-        </Link>
-      </div>
+      <Header></Header>
       {/* container image */}
       <div
         id="image"
@@ -105,29 +115,33 @@ export default function DetailProducts() {
           </div>
         </div>
 
-        <div className="mt-4 flex justify-between items-center">
-          <div>
-            <span className="font-bold">Milk</span>
+        {!data.name.includes("Americano") && !data.name.includes("Tea") ? (
+          <div className="mt-4 flex justify-between items-center">
+            <div>
+              <span className="font-bold">Milk</span>
+            </div>
+            <div className="gap-x-3 flex ">
+              <button
+                className={`buttonOption ${
+                  options.milk === "oat" ? "active" : ""
+                }`}
+                onClick={() => handleOptionClick("milk", "oat")}
+              >
+                Oat
+              </button>
+              <button
+                className={`buttonOption ${
+                  options.milk === "regular" ? "active" : ""
+                }`}
+                onClick={() => handleOptionClick("milk", "regular")}
+              >
+                Regular
+              </button>
+            </div>
           </div>
-          <div className="gap-x-3 flex ">
-            <button
-              className={`buttonOption ${
-                options.milk === "oat" ? "active" : ""
-              }`}
-              onClick={() => handleOptionClick("milk", "oat")}
-            >
-              Oat
-            </button>
-            <button
-              className={`buttonOption ${
-                options.milk === "regular" ? "active" : ""
-              }`}
-              onClick={() => handleOptionClick("milk", "regular")}
-            >
-              Regular
-            </button>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}
 
         <div className="mt-4 flex justify-between items-center">
           <div>

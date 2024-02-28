@@ -6,6 +6,7 @@ import { RiHandHeartLine } from "react-icons/ri";
 import { IoLocationOutline } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSideBar }) => {
   console.log(isOpen);
@@ -57,13 +58,15 @@ const Sidebar = ({ isOpen, toggleSideBar }) => {
 
             <span>Loyalty Membership</span>
           </li>
+          <Link to="/address">
+            <li className="flex gap-x-3 items-center py-3 px-4">
+              <div className="rounded-full bg-primary p-2 text-white">
+                <IoLocationOutline />
+              </div>
+              <span>Alamat Tersimpan</span>
+            </li>
+          </Link>
 
-          <li className="flex gap-x-3 items-center py-3 px-4">
-            <div className="rounded-full bg-primary p-2 text-white">
-              <IoLocationOutline />
-            </div>
-            <span>Alamat Tersimpan</span>
-          </li>
           <li className="flex gap-x-3 items-center py-3 px-4">
             <div className="rounded-full bg-primary p-2 text-white">
               <BiSolidDiscount />
