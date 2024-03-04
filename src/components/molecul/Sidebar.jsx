@@ -78,12 +78,12 @@ const Sidebar = ({ isOpen, toggleSideBar }) => {
           <div className="fixed bottom-0 px-6 items-center justify-center border-t-2 w-full ">
             <div className="flex justify-between text-lg text-slate-500 py-6">
               <div>Hi! Fahmi</div>
-              <div className="flex gap-x-3 items-center">
+              <Link to="/profile" className="flex gap-x-3 items-center">
                 Profile
                 <div className="rounded-full bg-primary p-2 text-white">
                   <CgProfile />
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </footer>

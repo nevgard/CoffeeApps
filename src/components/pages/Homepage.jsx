@@ -30,7 +30,7 @@ const Dot = ({ active }) => (
 export default function Homepage({ toggleSideBar }) {
   const [swiper, setSwiper] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [activeOption, setActiveOption] = useState("Takeaway");
+  const [activeOption, setActiveOption] = useState("Take Away");
 
   const handleOptionClick = (option) => {
     setActiveOption(option);

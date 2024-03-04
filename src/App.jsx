@@ -6,6 +6,9 @@ import Sidebar from "./components/molecul/Sidebar";
 import DetailProducts from "./components/pages/DetailProducts";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Address from "./components/pages/Address";
+import AddAddress from "./components/pages/AddAddress";
+import Profile from "./components/pages/Profile";
+import EditProfile from "./components/pages/EditProfile";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -29,6 +32,9 @@ function App() {
           />
           <Route path="/productDetials/:id" element={<DetailProducts />} />
           <Route path="/address" element={<Address />} />
+          <Route path="/address/addAddress" element={<AddAddress />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile/editProfile" element={<EditProfile />} />
         </Routes>
       </BrowserRouter>
     </>

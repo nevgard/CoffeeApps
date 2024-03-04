@@ -48,7 +48,7 @@ export default function DetailProducts() {
   console.log(totalPrice);
   return (
     <div className="w-full flex flex-wrap bg-neutral-200">
-      <Header></Header>
+      <Header url="/"></Header>
       {/* container image */}
       <div
         id="image"

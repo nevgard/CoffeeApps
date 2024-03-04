@@ -7,7 +7,7 @@ export default function (props) {
       id="header"
       className="w-full px-4 py-3 shadow-md bg-white flex gap-x-3 items-center"
     >
-      <Link to={"/"}>
+      <Link to={props.url}>
         <IoChevronBackCircleOutline className=" text-4xl text-primary " />
       </Link>
       <span className=" text-xl">{props.text}</span>

@@ -5,17 +5,19 @@ import { FaHome } from "react-icons/fa";
 
 export default function Address() {
   return (
-    <div className="w-full flex flex-wrap  bg-neutral-200">
-      <Header text="Alamat Tersimpan"></Header>
+    <div className="w-full h-screen overflow-y-auto bg-neutral-200">
+      <Header url="/" text="Alamat Tersimpan"></Header>
       <div
         id="addAddress"
         className="w-full flex gap-x-3 p-6 items-center sticky bg-white mt-2  shadow-md"
       >
         <div className="text-xl rounded-full border-2 border-primary p-1 font-bold">
-          <FaPlus />
+          <Link to="/address/addAddress">
+            <FaPlus />
+          </Link>
         </div>
         <div className="flex flex-col">
-          <span>Tambah Alamat</span>
+          <Link to="/address/addAddress">Tambah Alamat</Link>
           <span className="text-xs font-light">
             Simpan alamat favorit yang ingin kamu simpan disini
           </span>
@@ -24,7 +26,7 @@ export default function Address() {
 
       <div
         id="savedAddress"
-        className="w-full p-6 flex gap-x-3 bg-white mt-2 shadow-md mx-4 rounded-xl"
+        className="p-6 flex gap-x-3 bg-white mt-2 shadow-md mx-4 rounded-xl"
       >
         <div>
           <FaHome className="text-primary text-2xl" />
