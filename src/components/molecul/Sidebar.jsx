@@ -44,13 +44,15 @@ const Sidebar = ({ isOpen, toggleSideBar }) => {
           </div>
         </div>
         <ul className="flex flex-col gap-y-3 relative m-0 list-none p-0 text-xl mt-6 px-6 ">
-          <li className="flex gap-x-3 items-center py-3 px-4">
-            <div className="rounded-full bg-primary p-2 text-white">
-              <MdOutlineEventNote />
-            </div>
+          <Link to={"/order"}>
+            <li className="flex gap-x-3 items-center py-3 px-4">
+              <div className="rounded-full bg-primary p-2 text-white">
+                <MdOutlineEventNote />
+              </div>
 
-            <span>Pesanan</span>
-          </li>
+              <span>Pesanan</span>
+            </li>
+          </Link>
           <li className="flex gap-x-3 items-center py-3 px-4">
             <div className="rounded-full bg-primary p-2 text-white">
               <RiHandHeartLine />

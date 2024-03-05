@@ -27,7 +27,7 @@ const Dot = ({ active }) => (
   ></span>
 );
 
-export default function Homepage({ toggleSideBar }) {
+export default function Homepage({ isOpen, toggleSideBar }) {
   const [swiper, setSwiper] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeOption, setActiveOption] = useState("Take Away");

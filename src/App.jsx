@@ -9,6 +9,7 @@ import Address from "./components/pages/Address";
 import AddAddress from "./components/pages/AddAddress";
 import Profile from "./components/pages/Profile";
 import EditProfile from "./components/pages/EditProfile";
+import Order from "./components/pages/Order";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,7 +26,7 @@ function App() {
             path="/"
             element={
               <>
-                <Homepage toggleSideBar={handleToggleSidebar} />
+                <Homepage isOpen={isOpen} toggleSideBar={handleToggleSidebar} />
                 <Sidebar isOpen={isOpen} toggleSideBar={handleToggleSidebar} />
               </>
             }
@@ -35,6 +36,7 @@ function App() {
           <Route path="/address/addAddress" element={<AddAddress />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/editProfile" element={<EditProfile />} />
+          <Route path="/order" element={<Order />} />
         </Routes>
       </BrowserRouter>
     </>
