@@ -2,14 +2,20 @@ import { Link, useParams } from "react-router-dom";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
 import { IoChevronBackCircleOutline } from "react-icons/io5";
-import ProductsList from "../../constant/ProductsList";
 import { useEffect, useState } from "react";
 import Header from "../molecul/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductById } from "../../redux/slice/productByIdSlice";
+import Loading from "../Atom/Loading";
 
 export default function DetailProducts() {
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const data = ProductsList.find((product) => product.id === parseInt(id, 10));
-  const [totalPrice, setTotalPrice] = useState(data.price);
+
+  const { product, loading, error } = useSelector((state) => state.productById);
+  console.log(product);
+
+  const [totalPrice, setTotalPrice] = useState(product ? product.price : 0);
   const [quantity, setQuantity] = useState(1);
   const [options, setOptions] = useState({
     temp: "hot",
@@ -18,6 +24,15 @@ export default function DetailProducts() {
     ice: "normal",
     sugar: "normal",
   });
+  useEffect(() => {
+    dispatch(getProductById(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (product) {
+      handleTotalPrice();
+    }
+  }, [product, options, quantity]);
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
@@ -33,19 +48,31 @@ export default function DetailProducts() {
   };
 
   const handleTotalPrice = () => {
-    let total = data.price;
-    if (options.size === "large") {
-      total += 2000;
+    if (product.price && !isNaN(product.price)) {
+      let total = Number(product.price);
+      if (options.size === "large") {
+        total += 2000;
+      }
+      if (options.milk === "oat") {
+        total += 1000;
+      }
+      setTotalPrice(Number(total * quantity));
     }
-    if (options.milk === "oat") {
-      total += 1000;
-    }
-    setTotalPrice(total * quantity);
   };
-  useEffect(() => {
-    handleTotalPrice(), [options, quantity];
-  });
   console.log(totalPrice);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div className="w-full flex flex-wrap bg-neutral-200">
       <Header url="/"></Header>
@@ -54,9 +81,11 @@ export default function DetailProducts() {
         id="image"
         className="w-full flex flex-col justify-center items-center p-4 m-4 shadow-md rounded-lg bg-white "
       >
-        <span className="font-bold text-xl">{data.name}</span>
-        <span className="text-slate-500 text-sm">{data.category}</span>
-        <img src={data.image} alt="" className="w-64 h-80 object-center" />
+        <span className="font-bold text-xl">{product && product.name}</span>
+        <span className="text-slate-500 text-sm">
+          {product && product.category}
+        </span>
+        <img src={product.image} alt="" className="w-64 h-80 object-center" />
       </div>
       {/* container option detail */}
       <div
@@ -115,33 +144,29 @@ export default function DetailProducts() {
           </div>
         </div>
 
-        {!data.name.includes("Americano") && !data.name.includes("Tea") ? (
-          <div className="mt-4 flex justify-between items-center">
-            <div>
-              <span className="font-bold">Milk</span>
-            </div>
-            <div className="gap-x-3 flex ">
-              <button
-                className={`buttonOption ${
-                  options.milk === "oat" ? "active" : ""
-                }`}
-                onClick={() => handleOptionClick("milk", "oat")}
-              >
-                Oat
-              </button>
-              <button
-                className={`buttonOption ${
-                  options.milk === "regular" ? "active" : ""
-                }`}
-                onClick={() => handleOptionClick("milk", "regular")}
-              >
-                Regular
-              </button>
-            </div>
+        <div className="mt-4 flex justify-between items-center">
+          <div>
+            <span className="font-bold">Milk</span>
           </div>
-        ) : (
-          ""
-        )}
+          <div className="gap-x-3 flex ">
+            <button
+              className={`buttonOption ${
+                options.milk === "oat" ? "active" : ""
+              }`}
+              onClick={() => handleOptionClick("milk", "oat")}
+            >
+              Oat
+            </button>
+            <button
+              className={`buttonOption ${
+                options.milk === "regular" ? "active" : ""
+              }`}
+              onClick={() => handleOptionClick("milk", "regular")}
+            >
+              Regular
+            </button>
+          </div>
+        </div>
 
         <div className="mt-4 flex justify-between items-center">
           <div>
@@ -210,10 +235,7 @@ export default function DetailProducts() {
       <footer className="w-full px-6 py-4 bg-white sticky bottom-0 rounded-t-3xl drop-shadow-2xl">
         <div className="flex justify-between items-center">
           <span id="price" className="text-xl font-bold">
-            {totalPrice.toLocaleString("id-ID", {
-              style: "currency",
-              currency: "IDR",
-            })}
+            {totalPrice}
           </span>
           <div className="flex gap-x-3 ">
             <button

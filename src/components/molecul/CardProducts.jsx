@@ -1,10 +1,15 @@
 // Import Swiper React components
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../redux/slice/productsSlice";
 
 export default function CardProducts(props) {
   const { data } = props;
+
   return (
     <Swiper
       className="items-center h-96 px-6"
