@@ -32,8 +32,8 @@ export default function CardProducts(props) {
               src={product.image}
               alt=""
             />
-            <div className=" flex flex-col border z-0 bg-white text-center w-32 p-4 rounded-3xl justify-between absolute top-24">
-              <h1 className="mt-10 mb-12 font-bold">{product.name}</h1>
+            <div className=" flex flex-col border z-0 bg-white text-center w-32 h-52 p-4 rounded-3xl justify-between absolute top-24">
+              <h1 className="mt-10  font-bold">{product.name}</h1>
               <h1 className="pt-12">
                 {product.price.toLocaleString("id-ID", {
                   style: "currency",

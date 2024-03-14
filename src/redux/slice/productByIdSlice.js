@@ -8,7 +8,7 @@ const initialState = {
 
 export const getProductById = createAsyncThunk("product", (id) => {
   return axios.get(`http://localhost:9001/products/${id}`).then((response) => {
-    return response.data;
+    return response.data.data;
   });
 });
 

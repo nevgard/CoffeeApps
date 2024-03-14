@@ -235,7 +235,7 @@ export default function DetailProducts() {
       <footer className="w-full px-6 py-4 bg-white sticky bottom-0 rounded-t-3xl drop-shadow-2xl">
         <div className="flex justify-between items-center">
           <span id="price" className="text-xl font-bold">
-            {totalPrice}
+            RP. {new Intl.NumberFormat("en-US").format(totalPrice)}
           </span>
           <div className="flex gap-x-3 ">
             <button

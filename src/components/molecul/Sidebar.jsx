@@ -7,9 +7,23 @@ import { IoLocationOutline } from "react-icons/io5";
 import { BiSolidDiscount } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Logout, reset } from "../../redux/slice/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSideBar }) => {
-  console.log(isOpen);
+  const dispatch = useDispatch();
+  const { user, success, loading, error } = useSelector((state) => state.auth);
+
+  const logout = () => {
+    dispatch(Logout());
+    dispatch(reset());
+    navigate("/login");
+  };
+  console.log(user);
+  console.log(error);
+  console.log(success);
+
   return (
     <>
       <nav
@@ -79,7 +93,8 @@ const Sidebar = ({ isOpen, toggleSideBar }) => {
         <footer>
           <div className="fixed bottom-0 px-6 items-center justify-center border-t-2 w-full ">
             <div className="flex justify-between text-lg text-slate-500 py-6">
-              <div>Hi! Fahmi</div>
+              {user && <div>{user}</div>}
+
               <Link to="/profile" className="flex gap-x-3 items-center">
                 Profile
                 <div className="rounded-full bg-primary p-2 text-white">

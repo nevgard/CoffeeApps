@@ -10,7 +10,7 @@ const initialState = {
 export const getProducts = createAsyncThunk("products", () => {
   return axios
     .get("http://localhost:9001/products/")
-    .then((response) => response.data);
+    .then((response) => response.data.data);
 });
 
 const productsSlice = createSlice({
