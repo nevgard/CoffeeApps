@@ -13,12 +13,13 @@ import { useNavigate } from "react-router-dom";
 
 const Sidebar = ({ isOpen, toggleSideBar }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, success, loading, error } = useSelector((state) => state.auth);
 
   const logout = () => {
     dispatch(Logout());
     dispatch(reset());
-    navigate("/login");
+    navigate("/");
   };
   console.log(user);
   console.log(error);
@@ -93,14 +94,32 @@ const Sidebar = ({ isOpen, toggleSideBar }) => {
         <footer>
           <div className="fixed bottom-0 px-6 items-center justify-center border-t-2 w-full ">
             <div className="flex justify-between text-lg text-slate-500 py-6">
-              {user && <div>{user}</div>}
-
-              <Link to="/profile" className="flex gap-x-3 items-center">
-                Profile
-                <div className="rounded-full bg-primary p-2 text-white">
-                  <CgProfile />
+              {user ? (
+                <div className="flex justify-center items-center gap-x-2 cursor-pointer">
+                  <div className="bg-primary rounded-full p-2 text-white">
+                    <CgProfile />
+                  </div>
+                  <div className="flex flex-col text-sm font-bold">
+                    <span>{"Hi! "}</span>
+                    <span>{user.fullName}</span>
+                  </div>
                 </div>
-              </Link>
+              ) : (
+                <Link
+                  className="flex gap-x-3 items-center text-sm font-bold cursor-pointer"
+                  to={"/login"}
+                >
+                  {" "}
+                  Login
+                </Link>
+              )}
+
+              <div
+                onClick={logout}
+                className="flex gap-x-3 items-center text-sm font-bold cursor-pointer"
+              >
+                Logout
+              </div>
             </div>
           </div>
         </footer>

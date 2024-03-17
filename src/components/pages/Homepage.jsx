@@ -19,18 +19,23 @@ import NonCoffee from "../organism/Non-Coffee";
 import Tea from "../organism/Tea";
 import NewReleases from "../organism/NewReleases";
 import Categories from "../organism/Categories";
-const Dot = ({ active }) => (
-  <span
-    className={`h-3 w-3 rounded-full mx-1 ${
-      active ? "bg-primary" : "bg-gray-300"
-    }`}
-  ></span>
-);
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Homepage({ isOpen, toggleSideBar }) {
+  const dispatch = useDispatch();
+
+  const { user, success, loading, error } = useSelector((state) => state.auth);
   const [swiper, setSwiper] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [activeOption, setActiveOption] = useState("Take Away");
+  const Dot = ({ active }) => (
+    <span
+      className={`h-3 w-3 rounded-full mx-1 ${
+        active ? "bg-primary" : "bg-gray-300"
+      }`}
+    ></span>
+  );
 
   const handleOptionClick = (option) => {
     setActiveOption(option);
@@ -66,7 +71,12 @@ export default function Homepage({ isOpen, toggleSideBar }) {
               <button onClick={toggleSideBar}>
                 <CiMenuFries />
               </button>
-              Hi Fahmi
+              {user && (
+                <span className="text-pretty">
+                  {"Hi! "}
+                  {user.fullName}
+                </span>
+              )}
             </div>
           </div>
           <div className=" w-full gap-x-3 flex justify-end items-center text-white p-3">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login, reset } from "../../redux/slice/AuthSlice";
 import { Swiper, SwiperSlide } from "swiper/react";
 export default function Login() {
@@ -18,8 +18,6 @@ export default function Login() {
     if (user || success) {
       navigate("/");
     }
-
-    dispatch(reset());
   }, [user, success, navigate, dispatch]);
 
   const Auth = (e) => {
@@ -57,9 +55,6 @@ export default function Login() {
     }
   };
 
-  const handleLogin = () => {
-    console.log("Login");
-  };
   return (
     <>
       <div className="overflow-hidden h-screen w-full">
@@ -114,15 +109,21 @@ export default function Login() {
                 />
               </div>
               <div className="w-full mt-6">
-                <button className="bg-primary text-white w-full p-4 rounded-full">
+                <button
+                  type="submit"
+                  className="bg-primary text-white w-full p-4 rounded-full"
+                >
                   Masuk
                 </button>
               </div>
               <div className="flex w-full justify-center items-center gap-x-3 ">
                 <span>Belum punya akun ?</span>
-                <span className=" text-md hover:font-bold hover:text-primary  hover:cursor-pointer">
+                <Link
+                  to="/register"
+                  className=" text-md hover:font-bold hover:text-primary  hover:cursor-pointer"
+                >
                   Daftar Sekarang
-                </span>
+                </Link>
               </div>
             </form>
           </div>

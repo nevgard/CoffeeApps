@@ -59,7 +59,6 @@ export default function DetailProducts() {
       setTotalPrice(Number(total * quantity));
     }
   };
-  console.log(totalPrice);
 
   if (loading) {
     return <Loading />;
@@ -143,54 +142,56 @@ export default function DetailProducts() {
             </button>
           </div>
         </div>
-
-        <div className="mt-4 flex justify-between items-center">
-          <div>
-            <span className="font-bold">Milk</span>
+        {product.category != "Tea" && "kopi Lokal" && (
+          <div className="mt-4 flex justify-between items-center">
+            <div>
+              <span className="font-bold">Milk</span>
+            </div>
+            <div className="gap-x-3 flex ">
+              <button
+                className={`buttonOption ${
+                  options.milk === "oat" ? "active" : ""
+                }`}
+                onClick={() => handleOptionClick("milk", "oat")}
+              >
+                Oat
+              </button>
+              <button
+                className={`buttonOption ${
+                  options.milk === "regular" ? "active" : ""
+                }`}
+                onClick={() => handleOptionClick("milk", "regular")}
+              >
+                Regular
+              </button>
+            </div>
           </div>
-          <div className="gap-x-3 flex ">
-            <button
-              className={`buttonOption ${
-                options.milk === "oat" ? "active" : ""
-              }`}
-              onClick={() => handleOptionClick("milk", "oat")}
-            >
-              Oat
-            </button>
-            <button
-              className={`buttonOption ${
-                options.milk === "regular" ? "active" : ""
-              }`}
-              onClick={() => handleOptionClick("milk", "regular")}
-            >
-              Regular
-            </button>
+        )}
+        {options.temp == "ice" && (
+          <div className="mt-4 flex justify-between items-center">
+            <div>
+              <span className="font-bold">Ice</span>
+            </div>
+            <div className="gap-x-3 flex ">
+              <button
+                className={`buttonOption ${
+                  options.ice === "less" ? "active" : ""
+                }`}
+                onClick={() => handleOptionClick("ice", "less")}
+              >
+                Less
+              </button>
+              <button
+                className={`buttonOption ${
+                  options.ice === "normal" ? "active" : ""
+                }`}
+                onClick={() => handleOptionClick("ice", "normal")}
+              >
+                Normal
+              </button>
+            </div>
           </div>
-        </div>
-
-        <div className="mt-4 flex justify-between items-center">
-          <div>
-            <span className="font-bold">Ice</span>
-          </div>
-          <div className="gap-x-3 flex ">
-            <button
-              className={`buttonOption ${
-                options.ice === "less" ? "active" : ""
-              }`}
-              onClick={() => handleOptionClick("ice", "less")}
-            >
-              Less
-            </button>
-            <button
-              className={`buttonOption ${
-                options.ice === "normal" ? "active" : ""
-              }`}
-              onClick={() => handleOptionClick("ice", "normal")}
-            >
-              Normal
-            </button>
-          </div>
-        </div>
+        )}
 
         <div className="mt-4 flex justify-between items-center">
           <div>

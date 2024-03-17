@@ -39,7 +39,7 @@ export const getUser = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const Logout = createAsyncThunk("user/logout", async () => {
-  await axios.delete("http://localhost:1104/logout");
+  await axios.delete("http://localhost:9001/logout");
 });
 
 const authSlice = createSlice({

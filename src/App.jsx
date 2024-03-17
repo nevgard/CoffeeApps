@@ -11,6 +11,7 @@ import Profile from "./components/pages/Profile";
 import EditProfile from "./components/pages/EditProfile";
 import Order from "./components/pages/Order";
 import Login from "./components/pages/Login";
+import Register from "./components/pages/Register";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -33,6 +34,7 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="/productDetials/:id" element={<DetailProducts />} />
           <Route path="/address" element={<Address />} />
           <Route path="/address/addAddress" element={<AddAddress />} />
